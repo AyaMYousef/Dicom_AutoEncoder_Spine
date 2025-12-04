@@ -1,17 +1,8 @@
-Perfect! Here’s an updated **README.md** with badges for GitHub Actions, Docker, and Python version:
-
-````markdown
 # DICOM AutoEncoder - Spine Anomaly Detection
-
-[![GitHub Actions](https://img.shields.io/github/actions/workflow/status/AyaMYousef/Dicom_AutoEncoder_Spine/deploy.yml?branch=main&logo=github&style=flat-square)](https://github.com/AyaMYousef/Dicom_AutoEncoder_Spine/actions)
-[![Docker](https://img.shields.io/badge/docker-ready-blue?logo=docker&style=flat-square)](https://github.com/AyaMYousef/Dicom_AutoEncoder_Spine)
-[![Python](https://img.shields.io/badge/python-3.11-green?style=flat-square&logo=python)](https://www.python.org/)
-
----
 
 ## Description
 
-This project uses a convolutional autoencoder to identify abnormal patterns in spinal DICOM images. The model reconstructs input images and computes a reconstruction error; images with high error are flagged as anomalies.  
+This project uses a convolutional autoencoder to identify abnormal patterns in spinal DICOM images. The model reconstructs input images and computes a reconstruction error; images with high error are flagged as anomalies.
 
 It provides a **FastAPI** endpoint for inference and is fully containerized with **Docker**, enabling easy deployment.
 
@@ -34,7 +25,7 @@ It provides a **FastAPI** endpoint for inference and is fully containerized with
 ```bash
 git clone https://github.com/AyaMYousef/Dicom_AutoEncoder_Spine.git
 cd Dicom_AutoEncoder_Spine
-````
+```
 
 ### Using Docker
 
@@ -58,11 +49,11 @@ The FastAPI server will be available at `http://localhost:8000`.
 
 **POST** `/predict?threshold=<value>`
 
-* **Request**: send a DICOM image as input
-* **Response**: JSON containing:
+- **Request**: send a DICOM image as input
+- **Response**: JSON containing:
 
-  * `reconstruction_mse`: float
-  * `is_anomaly`: boolean
+  - `reconstruction_mse`: float
+  - `is_anomaly`: boolean
 
 Example:
 
@@ -77,7 +68,7 @@ Example:
 
 ## GitHub Actions
 
-* The project includes a CI/CD workflow to:
+- The project includes a CI/CD workflow to:
 
   1. Build Docker image
   2. Run tests (if configured)
@@ -87,22 +78,21 @@ Example:
 
 ## Requirements
 
-* Python 3.11
-* TensorFlow 2.18.0
-* FastAPI, Uvicorn
-* OpenCV, Pydicom, NumPy, Pillow
-* Docker
+- Python 3.11
+- TensorFlow 2.18.0
+- FastAPI, Uvicorn
+- OpenCV, Pydicom, NumPy, Pillow
+- Docker
 
 ---
 
 ## Docker Image
 
-* Built and published via GitHub Actions
-* Pull image:
+- Built and published via GitHub Actions
+- Pull image:
 
 ```bash
 docker pull ghcr.io/<your-username>/dicom-autoencoder:latest
 ```
 
 ---
-
