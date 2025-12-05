@@ -135,16 +135,14 @@ python -m streamlit run streamlit_app.py
 
 ### 3️⃣ Usage
 
-* Upload an image (PNG, JPG, or DICOM) using the file uploader.
-* Streamlit sends the file to the FastAPI backend for prediction.
-* The model’s prediction will be displayed on the interface.
+- Upload an image (PNG, JPG, or DICOM) using the file uploader.
+- Streamlit sends the file to the FastAPI backend for prediction.
+- The model’s prediction will be displayed on the interface.
 
 ---
 
 ### 4️⃣ Notes
 
-* Ensure FastAPI is running on `http://127.0.0.1:8000` or update the Streamlit code with your backend URL.
+- Ensure FastAPI is running on `http://127.0.0.1:8000` or update the Streamlit code with your backend URL.
 
 ---
-
-
