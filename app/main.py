@@ -2,9 +2,17 @@ from http.client import HTTPException
 from app.model import predict_anomaly
 from fastapi import FastAPI, UploadFile, File
 from app.utils import preprocess_dicom, preprocess_image
-
+import os
+import pickle
 
 app = FastAPI(title="DICOM Autoencoder Anomaly Detection")
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+THRESHOLD_PATH = os.path.join(BASE_DIR, "models", "threshold_full_dataset.pkl")  
+
+with open(THRESHOLD_PATH, "rb") as f:
+    THRESHOLD = pickle.load(f)
+
 
 @app.get("/healtycheck")
 def read_root():
@@ -15,7 +23,7 @@ def root():
     return {"message": "Welcome to the DICOM Autoencoder API"}
 
 @app.post("/predict")
-async def predict(file: UploadFile = File(...), threshold: float = 0.01):
+async def predict(file: UploadFile = File(...) ):
     """Upload a DICOM or image file and return anomaly prediction."""
 
     filename = file.filename.lower()
@@ -34,5 +42,5 @@ async def predict(file: UploadFile = File(...), threshold: float = 0.01):
         )
 
     # Run prediction
-    result = predict_anomaly(img, threshold)
+    result = predict_anomaly(img, threshold=0.05)
     return result

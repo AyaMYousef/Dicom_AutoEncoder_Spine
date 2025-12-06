@@ -1,3 +1,4 @@
+import pickle
 import numpy as np
 from tensorflow.keras.models import load_model
 import os
@@ -5,17 +6,23 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 MODEL_PATH = os.path.join(BASE_DIR, "models", "autoencoder_model.keras")  
+THRESHOLD_PATH = os.path.join(BASE_DIR, "models", "threshold_full_dataset.pkl")  
 
 # Load the model
 model = load_model(MODEL_PATH)
 
-def predict_anomaly(image, threshold=0.01):
+with open(THRESHOLD_PATH, "rb") as f:
+    THRESHOLD = pickle.load(f)
+
+def predict_anomaly(image, threshold=0.05):
     """Run reconstruction and compute anomaly flag."""
+    if threshold is None:
+        threshold = THRESHOLD  
+
     image_batch = np.expand_dims(image, axis=0)
-    
     reconstructions = model.predict(image_batch)
     mse = np.mean((image - reconstructions[0]) ** 2)
-    
+
     return {
         "reconstruction_mse": float(mse),
         "is_anomaly": bool(mse > threshold)
